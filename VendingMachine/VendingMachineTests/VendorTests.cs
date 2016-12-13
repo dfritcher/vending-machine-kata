@@ -12,9 +12,9 @@ namespace VendingMachineTests
         {
             VendingMachine vm = new VendingMachine();
             var totalInsertedCoins = vm.InsertCoin(Size.TwentyOneMM, Weight.FiveGrams);
-            totalInsertedCoins += vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
-                
-            Assert.IsTrue(totalInsertedCoins == 5);
+            totalInsertedCoins += vm.InsertCoin(Size.SeventeenMM, Weight.TwoGrams);
+
+            Assert.IsTrue(totalInsertedCoins == 15);
         }
     }
 }
