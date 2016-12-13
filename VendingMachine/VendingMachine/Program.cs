@@ -18,6 +18,7 @@ namespace VendingMachineProject
     {
         private int coinReturnTotal = 0;
         private int insertedCoinTotal = 0;
+        private List<string> products = new List<string>() { "cola", "chips", "candy" };
 
         public int InsertCoin(Size coinSize, Weight coinWeight)
         {
@@ -47,6 +48,11 @@ namespace VendingMachineProject
         public int DisplayCoinReturn()
         {
             return coinReturnTotal;
+        }
+
+        public List<string> GetProducts()
+        {
+            return products;
         }
     }
 }

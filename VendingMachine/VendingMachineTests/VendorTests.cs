@@ -15,6 +15,7 @@ namespace VendingMachineTests
             vm = new VendingMachine();
         }
 
+        #region Coin Related Tests
         [TestMethod]
         public void VendingMachineAcceptsValidCoins()
         {
@@ -59,5 +60,19 @@ namespace VendingMachineTests
 
             Assert.IsTrue(message == totalInsertedCoins.ToString());
         }
+        #endregion
+
+        #region Product Related Tests
+        [TestMethod]
+        public void VendingMachineDisplaysAvailableProducts()
+        {
+            var productList = vm.GetProducts();
+
+            Assert.IsTrue(productList.Count == 3);
+            Assert.IsTrue(productList.Contains("cola"));
+            Assert.IsTrue(productList.Contains("chips"));
+            Assert.IsTrue(productList.Contains("candy"));
+        }
+        #endregion
     }
 }
