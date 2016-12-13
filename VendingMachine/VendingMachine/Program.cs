@@ -18,7 +18,12 @@ namespace VendingMachineProject
     {
         private int coinReturnTotal = 0;
         private int insertedCoinTotal = 0;
-        private List<string> products = new List<string>() { "cola", "chips", "candy" };
+        private Product selectedItem;
+        private List<Product> products = new List<Product>() {
+            new Product { Name = "cola", Price = 1.00m },
+            new Product { Name = "chips", Price = .50m},
+            new Product { Name = "candy", Price = .65m }
+        };
 
         public int InsertCoin(Size coinSize, Weight coinWeight)
         {
@@ -50,9 +55,19 @@ namespace VendingMachineProject
             return coinReturnTotal;
         }
 
-        public List<string> GetProducts()
+        public List<Product> GetProducts()
         {
             return products;
+        }
+
+        public void SelectItem(Product item)
+        {
+
+        }
+
+        public decimal DisplayItemPrice()
+        {
+            return selectedItem.Price;
         }
     }
 }

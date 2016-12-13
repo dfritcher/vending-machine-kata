@@ -15,4 +15,10 @@
         TwoGrams, // dime
         FiveAndAHalfGrams // quarter
     }
+
+    public struct Product
+    {
+        public string Name;
+        public decimal Price;
+    }
 }

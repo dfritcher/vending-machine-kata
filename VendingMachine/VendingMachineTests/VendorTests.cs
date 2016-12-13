@@ -69,10 +69,30 @@ namespace VendingMachineTests
             var productList = vm.GetProducts();
 
             Assert.IsTrue(productList.Count == 3);
-            Assert.IsTrue(productList.Contains("cola"));
-            Assert.IsTrue(productList.Contains("chips"));
-            Assert.IsTrue(productList.Contains("candy"));
+            Assert.IsTrue(productList.Contains(new Product { Name = "cola", Price = 1.00m }));
+            Assert.IsTrue(productList.Contains(new Product { Name = "chips", Price = .50m }));
+            Assert.IsTrue(productList.Contains(new Product { Name = "candy", Price = .65m }));
         }
+
+        [TestMethod]
+        public void VendingMachineDisplaysItemPriceWhenNotEnoughMoneyInserted()
+        {
+            var item = vm.GetProducts();
+
+            vm.SelectItem(item.Find(c => c.Name == "cola"));
+            var colaPrice = vm.DisplayItemPrice();
+
+            vm.SelectItem(item.Find(c => c.Name == "chips"));
+            var chipPrice = vm.DisplayItemPrice();
+
+            vm.SelectItem(item.Find(c => c.Name == "candy"));
+            var candyPrice = vm.DisplayItemPrice();
+
+            Assert.IsTrue(colaPrice.ToString() == "PRICE $1.00");
+            Assert.IsTrue(chipPrice.ToString() == "PRICE $0.50");
+            Assert.IsTrue(candyPrice.ToString() == "PRICE $0.65");
+        }
+
         #endregion
     }
 }
