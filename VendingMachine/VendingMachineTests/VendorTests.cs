@@ -26,5 +26,14 @@ namespace VendingMachineTests
 
             vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
         }
+
+        [TestMethod]
+        public void VendingMachineDisplaysInsertCoinMessage()
+        {
+            VendingMachine vm = new VendingMachine();
+            var message = vm.DisplayTotalAmount();
+
+            Assert.IsTrue(message == "INSERT COIN");
+        }
     }
 }
