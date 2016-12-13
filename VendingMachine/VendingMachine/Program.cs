@@ -17,26 +17,26 @@ namespace VendingMachineProject
     public class VendingMachine
     {
         private int coinReturnTotal = 0;
-        private int insertedCoinTotal = 0;
+        private decimal insertedCoinTotal = 0;
         private Product selectedItem;
         private List<Product> products = new List<Product>() {
             new Product { Name = "cola", Price = 1.00m },
-            new Product { Name = "chips", Price = .50m},
-            new Product { Name = "candy", Price = .65m }
+            new Product { Name = "chips", Price = 0.50m},
+            new Product { Name = "candy", Price = 0.65m }
         };
 
-        public int InsertCoin(Size coinSize, Weight coinWeight)
+        public decimal InsertCoin(Coin coin)
         {
-            if (coinSize == Size.TwentyOneMM && coinWeight == Weight.FiveGrams)
-                insertedCoinTotal += 5;
+            if (coin.Size == Size.TwentyOneMM && coin.Weight == Weight.FiveGrams)
+                insertedCoinTotal += .05m;
             
-            if (coinSize == Size.SeventeenMM && coinWeight == Weight.TwoGrams)
-                insertedCoinTotal += 10;
+            if (coin.Size == Size.SeventeenMM && coin.Weight == Weight.TwoGrams)
+                insertedCoinTotal += .10m;
 
-            if (coinSize == Size.TwentyFourMM && coinWeight == Weight.FiveAndAHalfGrams)
-                insertedCoinTotal += 25;
+            if (coin.Size == Size.TwentyFourMM && coin.Weight == Weight.FiveAndAHalfGrams)
+                insertedCoinTotal += .25m;
 
-            if (coinSize == Size.NineteenMM && coinWeight == Weight.TwoAndAHalfGrams)
+            if (coin.Size == Size.NineteenMM && coin.Weight == Weight.TwoAndAHalfGrams)
                 coinReturnTotal++;
 
             return insertedCoinTotal; ;
@@ -62,12 +62,12 @@ namespace VendingMachineProject
 
         public void SelectItem(Product item)
         {
-
+            selectedItem = item;
         }
 
-        public decimal DisplayItemPrice()
+        public string DisplayItemPrice()
         {
-            return selectedItem.Price;
+            return string.Format("PRICE ${0}", selectedItem.Price);
         }
     }
 }

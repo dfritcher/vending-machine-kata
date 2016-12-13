@@ -8,28 +8,36 @@ namespace VendingMachineTests
     public class VendorTests
     {
         VendingMachine vm;
+        Coin penny;
+        Coin nickel;
+        Coin dime;
+        Coin quarter;
 
         [TestInitialize]
         public void InitializeTests()
         {
             vm = new VendingMachine();
+            penny = new Coin { Size = Size.NineteenMM, Weight = Weight.TwoAndAHalfGrams };
+            nickel = new Coin { Size = Size.TwentyOneMM, Weight = Weight.FiveGrams };
+            dime = new Coin { Size = Size.SeventeenMM, Weight = Weight.TwoGrams };
+            quarter = new Coin { Size = Size.TwentyFourMM, Weight = Weight.FiveAndAHalfGrams };
         }
 
         #region Coin Related Tests
         [TestMethod]
         public void VendingMachineAcceptsValidCoins()
         {
-            var totalInsertedCoins = vm.InsertCoin(Size.TwentyOneMM, Weight.FiveGrams);
-            totalInsertedCoins = vm.InsertCoin(Size.SeventeenMM, Weight.TwoGrams);
-            totalInsertedCoins = vm.InsertCoin(Size.TwentyFourMM, Weight.FiveAndAHalfGrams);
+            var totalInsertedCoins = vm.InsertCoin(nickel);
+            totalInsertedCoins = vm.InsertCoin(dime);
+            totalInsertedCoins = vm.InsertCoin(quarter);
 
-            Assert.IsTrue(totalInsertedCoins == 40);
+            Assert.IsTrue(totalInsertedCoins == .40m);
         }
 
         [TestMethod]
         public void VendingMachineRejectsInValidCoins()
         {
-            var totalInsertedCoins = vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+            var totalInsertedCoins = vm.InsertCoin(penny);
 
             Assert.IsTrue(totalInsertedCoins == 0);
         }
@@ -37,7 +45,7 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineReturnsRejectedCoins()
         {
-            vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+            vm.InsertCoin(penny);
            
             var coinReturn = vm.DisplayCoinReturn();
 
@@ -55,7 +63,7 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineDisplaysTotalAmountOfInsertedCoins()
         {
-            var totalInsertedCoins = vm.InsertCoin(Size.TwentyFourMM, Weight.FiveAndAHalfGrams);
+            var totalInsertedCoins = vm.InsertCoin(quarter);
             var message = vm.DisplayTotalAmount();
 
             Assert.IsTrue(message == totalInsertedCoins.ToString());
@@ -93,6 +101,13 @@ namespace VendingMachineTests
             Assert.IsTrue(candyPrice.ToString() == "PRICE $0.65");
         }
 
+        [TestMethod]
+        public void VendingMachineDispensesProductWhenEnoughMoneyIsInserted()
+        {
+            var item = vm.GetProducts();
+
+            vm.InsertCoin(quarter);
+        }
         #endregion
     }
 }
