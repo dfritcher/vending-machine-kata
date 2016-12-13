@@ -15,7 +15,9 @@ namespace VendingMachineTests
             totalInsertedCoins += vm.InsertCoin(Size.SeventeenMM, Weight.TwoGrams);
             totalInsertedCoins += vm.InsertCoin(Size.TwentyFourMM, Weight.FiveAndAHalfGrams);
 
-            Assert.IsTrue(totalInsertedCoins == 15);
+            Assert.IsTrue(totalInsertedCoins == 40);
         }
+
+        
     }
 }
