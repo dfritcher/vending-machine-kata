@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine", "VendingMachine\VendingMachine.csproj", "{F9BD7D5E-374F-4060-A6C2-1FC56DA72EF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachineProject", "VendingMachine\VendingMachineProject.csproj", "{F9BD7D5E-374F-4060-A6C2-1FC56DA72EF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachineTests", "VendingMachineTests\VendingMachineTests.csproj", "{DDA5A731-9DE6-4888-A2C3-E566AB121C86}"
 EndProject

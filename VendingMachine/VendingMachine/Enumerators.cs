@@ -1,4 +1,4 @@
-﻿namespace VendingMachine
+﻿namespace VendingMachineProject
 {
     public enum Size
     {
