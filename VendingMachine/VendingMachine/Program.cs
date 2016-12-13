@@ -27,5 +27,10 @@ namespace VendingMachineProject
 
             throw new InvalidOperationException("Invalid Coin");
         }
+
+        public string DisplayTotalAmount()
+        {
+            return "INSERT COIN";
+        }
     }
 }
