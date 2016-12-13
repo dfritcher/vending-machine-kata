@@ -16,6 +16,8 @@ namespace VendingMachineProject
 
     public class VendingMachine
     {
+        private int coinReturnTotal;
+
         public int InsertCoin(Size coinSize, Weight coinWeight)
         {
             if (coinSize == Size.TwentyOneMM && coinWeight == Weight.FiveGrams)
@@ -31,6 +33,11 @@ namespace VendingMachineProject
         public string DisplayTotalAmount()
         {
             return "INSERT COIN";
+        }
+
+        public int DisplayCoinReturn()
+        {
+            return coinReturnTotal;
         }
     }
 }

@@ -7,10 +7,17 @@ namespace VendingMachineTests
     [TestClass]
     public class VendorTests
     {
+        VendingMachine vm;
+
+        [TestInitialize]
+        public void InitializeTests()
+        {
+            vm = new VendingMachine();
+        }
+
         [TestMethod]
         public void VendingMachineAcceptsValidCoins()
         {
-            VendingMachine vm = new VendingMachine();
             var totalInsertedCoins = vm.InsertCoin(Size.TwentyOneMM, Weight.FiveGrams);
             totalInsertedCoins += vm.InsertCoin(Size.SeventeenMM, Weight.TwoGrams);
             totalInsertedCoins += vm.InsertCoin(Size.TwentyFourMM, Weight.FiveAndAHalfGrams);
@@ -22,15 +29,23 @@ namespace VendingMachineTests
         [ExpectedException(typeof(InvalidOperationException))]
         public void VendingMachineRejectsInValidCoins()
         {
-            VendingMachine vm = new VendingMachine();
-
             vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+        }
+
+        [TestMethod]
+        public void VendingMachineReturnsRejectedCoins()
+        {
+            vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+           
+            var coinReturn = vm.DisplayCoinReturn();
+
+
+            Assert.IsTrue(coinReturn == 1);
         }
 
         [TestMethod]
         public void VendingMachineDisplaysInsertCoinMessage()
         {
-            VendingMachine vm = new VendingMachine();
             var message = vm.DisplayTotalAmount();
 
             Assert.IsTrue(message == "INSERT COIN");
