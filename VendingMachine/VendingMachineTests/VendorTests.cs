@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VendingMachine;
+using VendingMachineProject;
 
 namespace VendingMachineTests
 {
@@ -12,7 +12,9 @@ namespace VendingMachineTests
         {
             VendingMachine vm = new VendingMachine();
             var totalInsertedCoins = vm.InsertCoin(Size.TwentyOneMM, Weight.FiveGrams);
-            Assert.IsTrue(totalInsertedCoins = 5);
+            totalInsertedCoins += vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+                
+            Assert.IsTrue(totalInsertedCoins == 5);
         }
     }
 }
