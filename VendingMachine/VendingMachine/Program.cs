@@ -16,18 +16,23 @@ namespace VendingMachineProject
 
     public class VendingMachine
     {
-        private int coinReturnTotal;
+        private int coinReturnTotal = 0;
 
         public int InsertCoin(Size coinSize, Weight coinWeight)
         {
             if (coinSize == Size.TwentyOneMM && coinWeight == Weight.FiveGrams)
                 return 5;
+
             if (coinSize == Size.SeventeenMM && coinWeight == Weight.TwoGrams)
                 return 10;
+
             if (coinSize == Size.TwentyFourMM && coinWeight == Weight.FiveAndAHalfGrams)
                 return 25;
 
-            throw new InvalidOperationException("Invalid Coin");
+            if (coinSize == Size.NineteenMM && coinWeight == Weight.TwoAndAHalfGrams)
+                coinReturnTotal++;
+
+            return 0;
         }
 
         public string DisplayTotalAmount()

@@ -26,10 +26,11 @@ namespace VendingMachineTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void VendingMachineRejectsInValidCoins()
         {
-            vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+            var totalInsertedCoins = vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+
+            Assert.IsTrue(totalInsertedCoins == 0);
         }
 
         [TestMethod]
@@ -38,7 +39,6 @@ namespace VendingMachineTests
             vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
            
             var coinReturn = vm.DisplayCoinReturn();
-
 
             Assert.IsTrue(coinReturn == 1);
         }
