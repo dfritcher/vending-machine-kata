@@ -18,6 +18,13 @@ namespace VendingMachineTests
             Assert.IsTrue(totalInsertedCoins == 40);
         }
 
-        
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void VendingMachineRejectsInValidCoins()
+        {
+            VendingMachine vm = new VendingMachine();
+
+            vm.InsertCoin(Size.NineteenMM, Weight.TwoAndAHalfGrams);
+        }
     }
 }
