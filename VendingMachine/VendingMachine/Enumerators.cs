@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VendingMachine
+﻿namespace VendingMachine
 {
-    public class Enumerators
+    public enum Size
     {
-        enum Size { NineteenMM, TwentyOneMM, SeventeenMM, TwentyFourMM };
+        NineteenMM, // penny
+        TwentyOneMM, // nickel
+        SeventeenMM, // dime
+        TwentyFourMM // quarter
+    };
 
-        enum Weight { TwoAndAHalfGrams, FiveGrams,  TwoGrams, FiveAndAHalfGrams }
+    public enum Weight
+    {
+        TwoAndAHalfGrams, // penny 
+        FiveGrams, // nickel
+        TwoGrams, // dime
+        FiveAndAHalfGrams // quarter
     }
 }
