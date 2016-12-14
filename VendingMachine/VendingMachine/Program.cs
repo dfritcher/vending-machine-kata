@@ -65,6 +65,11 @@ namespace VendingMachineProject
             selectedItem = item;
         }
 
+        public Product DispenseItem()
+        {
+            return selectedItem;
+        }
+
         public string DisplayItemPrice()
         {
             return string.Format("PRICE ${0}", selectedItem.Price);
