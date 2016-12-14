@@ -74,5 +74,10 @@ namespace VendingMachineProject
         {
             return string.Format("PRICE ${0}", selectedItem.Price);
         }
+
+        public string DisplayVendMessage()
+        {
+            return "THANK YOU";
+        }
     }
 }
