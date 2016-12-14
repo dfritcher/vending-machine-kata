@@ -62,7 +62,7 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineDisplaysInsertCoinMessageWhenNoCoinsInserted()
         {
-            var message = vm.DisplayTotalAmount();
+            var message = vm.DisplayVendMessage();
 
             Assert.IsTrue(message == "INSERT COIN");
         }
@@ -71,7 +71,7 @@ namespace VendingMachineTests
         public void VendingMachineDisplaysTotalAmountOfInsertedCoins()
         {
             var totalInsertedCoins = vm.InsertCoin(quarter);
-            var message = vm.DisplayTotalAmount();
+            var message = vm.DisplayVendMessage();
 
             Assert.IsTrue(message == totalInsertedCoins.ToString());
         }
@@ -134,15 +134,16 @@ namespace VendingMachineTests
         public void VendingMachineDisplaysItemPriceWhenNotEnoughMoneyInserted()
         {
             var items = vm.GetProducts();
+            vm.InsertCoin(quarter);
 
             vm.SelectItem(items.Find(c => c.Name == "cola"));
-            var colaPrice = vm.DisplayItemPrice();
+            var colaPrice = vm.DisplayVendMessage();
 
             vm.SelectItem(items.Find(c => c.Name == "chips"));
-            var chipPrice = vm.DisplayItemPrice();
+            var chipPrice = vm.DisplayVendMessage();
 
             vm.SelectItem(items.Find(c => c.Name == "candy"));
-            var candyPrice = vm.DisplayItemPrice();
+            var candyPrice = vm.DisplayVendMessage();
 
             Assert.IsTrue(colaPrice.ToString() == "PRICE $1.00");
             Assert.IsTrue(chipPrice.ToString() == "PRICE $0.50");

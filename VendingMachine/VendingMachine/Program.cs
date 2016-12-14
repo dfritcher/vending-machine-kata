@@ -43,14 +43,6 @@ namespace VendingMachineProject
             return insertedCoinTotal; ;
         }
 
-        public string DisplayTotalAmount()
-        {
-            if (insertedCoinTotal == 0)
-                return "INSERT COIN";
-
-            return insertedCoinTotal.ToString();
-        }
-
         public int DisplayCoinReturn()
         {
             return coinReturnTotal;
@@ -84,7 +76,10 @@ namespace VendingMachineProject
                 itemPurchased = false;
                 return "THANK YOU";
             }
-            return DisplayTotalAmount();
+            if (insertedCoinTotal == 0)
+                return "INSERT COIN";
+
+            return DisplayItemPrice();
 
         }
     }
