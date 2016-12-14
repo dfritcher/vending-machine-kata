@@ -108,7 +108,7 @@ namespace VendingMachineTests
         }
 
         [TestMethod]
-        public void VendingMachineDisplaysMessageWhenEnoughMoneyIsInsertedAndItemIsDispensed()
+        public void VendingMachineDisplaysMessage()
         {
             vm.InsertCoin(quarter);
             vm.InsertCoin(quarter);
