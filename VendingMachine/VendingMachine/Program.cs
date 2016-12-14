@@ -20,6 +20,7 @@ namespace VendingMachineProject
         private decimal insertedCoinTotal = 0;
         private Product selectedItem;
         private bool itemPurchased = false;
+        private bool displayPrice = false;
         private List<Product> products = new List<Product>() {
             new Product { Name = "cola", Price = 1.00m },
             new Product { Name = "chips", Price = 0.50m},
@@ -56,6 +57,7 @@ namespace VendingMachineProject
         public void SelectItem(Product item)
         {
             selectedItem = item;
+            displayPrice = true;
         }
 
         public Product DispenseItem()
@@ -64,9 +66,14 @@ namespace VendingMachineProject
             return selectedItem;
         }
 
-        public string DisplayItemPrice()
+        private string DisplayItemPrice()
         {
             return string.Format("PRICE ${0}", selectedItem.Price);
+        }
+
+        private string DisplayCurrencyTotal()
+        {
+            return string.Format("${0}",insertedCoinTotal.ToString());
         }
 
         public string DisplayVendMessage()
@@ -78,9 +85,12 @@ namespace VendingMachineProject
             }
             if (insertedCoinTotal == 0)
                 return "INSERT COIN";
-
-            return DisplayItemPrice();
-
+            if (displayPrice)
+            {
+                displayPrice = false;
+                return DisplayItemPrice();
+            }
+            return DisplayCurrencyTotal();
         }
     }
 }

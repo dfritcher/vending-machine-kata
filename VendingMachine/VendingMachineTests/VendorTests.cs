@@ -70,10 +70,10 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineDisplaysTotalAmountOfInsertedCoins()
         {
-            var totalInsertedCoins = vm.InsertCoin(quarter);
+            vm.InsertCoin(quarter);
             var message = vm.DisplayVendMessage();
 
-            Assert.IsTrue(message == totalInsertedCoins.ToString());
+            Assert.IsTrue(message == "$0.25");
         }
         #endregion
 
@@ -150,6 +150,20 @@ namespace VendingMachineTests
             Assert.IsTrue(candyPrice.ToString() == "PRICE $0.65");
         }
 
+        [TestMethod]
+        public void VendingMachineDisplaysCorrectMessageWhenNotEnoughMoneyInsertedAfterMultipleChecks()
+        {
+            vm.InsertCoin(dime);
+            vm.InsertCoin(dime);
+
+            vm.SelectItem(chips);
+
+            var firstMessage = vm.DisplayVendMessage();
+            var secondMessage = vm.DisplayVendMessage();
+
+            Assert.IsTrue(firstMessage == "PRICE $0.50");
+            Assert.IsTrue(secondMessage == "$0.20");
+        }
         
         #endregion
     }
