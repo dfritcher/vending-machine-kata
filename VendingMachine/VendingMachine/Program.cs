@@ -19,6 +19,7 @@ namespace VendingMachineProject
         private int coinReturnTotal = 0;
         private decimal insertedCoinTotal = 0;
         private Product selectedItem;
+        private bool itemPurchased = false;
         private List<Product> products = new List<Product>() {
             new Product { Name = "cola", Price = 1.00m },
             new Product { Name = "chips", Price = 0.50m},
@@ -67,6 +68,7 @@ namespace VendingMachineProject
 
         public Product DispenseItem()
         {
+            itemPurchased = true;
             return selectedItem;
         }
 
@@ -77,7 +79,13 @@ namespace VendingMachineProject
 
         public string DisplayVendMessage()
         {
-            return "THANK YOU";
+            if (itemPurchased)
+            {
+                itemPurchased = false;
+                return "THANK YOU";
+            }
+            return DisplayTotalAmount();
+
         }
     }
 }

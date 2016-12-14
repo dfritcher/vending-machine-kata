@@ -110,16 +110,24 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineDisplaysMessage()
         {
-            vm.InsertCoin(quarter);
-            vm.InsertCoin(quarter);
-            vm.InsertCoin(quarter);
-            vm.InsertCoin(quarter);
-
-            vm.SelectItem(cola);
+            var dispenseItem = vm.DispenseItem(); 
 
             var message = vm.DisplayVendMessage();
 
             Assert.IsTrue(message == "THANK YOU");
+        }
+
+        [TestMethod]
+        public void VendingMachineDisplaysMessageAfterMultipleChecks()
+        {
+            var dispenseItem = vm.DispenseItem();
+
+            var message = vm.DisplayVendMessage();
+
+            var message2 = vm.DisplayVendMessage();
+
+            Assert.IsTrue(message == "THANK YOU");
+            Assert.IsTrue(message2 == "INSERT COIN");
         }
 
         [TestMethod]
