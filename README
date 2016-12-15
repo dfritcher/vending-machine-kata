@@ -1,0 +1,9 @@
+IDE: Microsoft Visual Studio Community 2015 Version 14.0.24720.00 Update 1
+Language: C#
+Application Type: Windows Console App
+
+Running the "VendingMachine.exe" will start the application. The products available in the vending machine will be listed at the top.
+Along with the selection of products users will be able to submit commands that simulate inserting coins into the machine, 
+returning all coins in the machine, and viewing the amount of money in the coin return. 
+
+Building the solution should only require you to open it with any compatible Visual Studio application.
