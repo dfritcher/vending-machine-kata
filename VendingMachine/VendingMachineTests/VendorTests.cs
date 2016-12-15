@@ -38,7 +38,7 @@ namespace VendingMachineTests
             totalInsertedCoins = vm.InsertCoin(dime);
             totalInsertedCoins = vm.InsertCoin(quarter);
 
-            Assert.IsTrue(totalInsertedCoins == .40m);
+            Assert.IsTrue(totalInsertedCoins == "$0.40");
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace VendingMachineTests
         {
             var totalInsertedCoins = vm.InsertCoin(penny);
 
-            Assert.IsTrue(totalInsertedCoins == 0);
+            Assert.IsTrue(totalInsertedCoins == "$0.00");
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineDisplaysInsertCoinMessageWhenNoCoinsInserted()
         {
-            var message = vm.DisplayVendMessage();
+            var message = vm.SelectItem(chips);
 
             Assert.IsTrue(message == "INSERT COIN");
         }
@@ -70,10 +70,9 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineDisplaysTotalAmountOfInsertedCoins()
         {
-            vm.InsertCoin(quarter);
-            var message = vm.DisplayVendMessage();
+            var display = vm.InsertCoin(quarter);
 
-            Assert.IsTrue(message == "$0.25");
+            Assert.IsTrue(display == "$0.25");
         }
         #endregion
 
@@ -99,20 +98,23 @@ namespace VendingMachineTests
             vm.InsertCoin(quarter);
             vm.InsertCoin(quarter);
 
-            vm.SelectItem(cola);
-
-            var dispensedItem = vm.DispenseItem();
+            var display = vm.SelectItem(cola);
+            var dispensedItem = vm.GetDispensedItem();
 
             Assert.IsNotNull(dispensedItem);
             Assert.IsTrue(dispensedItem.Name == cola.Name);
+            Assert.IsTrue(dispensedItem.Price == cola.Price);
         }
 
         [TestMethod]
-        public void VendingMachineDisplaysMessage()
+        public void VendingMachineDisplaysMessageWhenEnoughMoneyIsInsertedAndItemIsDispensed()
         {
-            var dispenseItem = vm.DispenseItem(); 
-
-            var message = vm.DisplayVendMessage();
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(dime);
+            vm.InsertCoin(nickel);
+            
+            var message = vm.SelectItem(candy);
 
             Assert.IsTrue(message == "THANK YOU");
         }
@@ -120,11 +122,14 @@ namespace VendingMachineTests
         [TestMethod]
         public void VendingMachineDisplaysMessageAfterMultipleChecks()
         {
-            var dispenseItem = vm.DispenseItem();
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(dime);
+            vm.InsertCoin(nickel);
 
-            var message = vm.DisplayVendMessage();
+            var message = vm.SelectItem(candy);
 
-            var message2 = vm.DisplayVendMessage();
+            var message2 = vm.SelectItem(candy);
 
             Assert.IsTrue(message == "THANK YOU");
             Assert.IsTrue(message2 == "INSERT COIN");
@@ -136,15 +141,10 @@ namespace VendingMachineTests
             var items = vm.GetProducts();
             vm.InsertCoin(quarter);
 
-            vm.SelectItem(items.Find(c => c.Name == "cola"));
-            var colaPrice = vm.DisplayVendMessage();
-
-            vm.SelectItem(items.Find(c => c.Name == "chips"));
-            var chipPrice = vm.DisplayVendMessage();
-
-            vm.SelectItem(items.Find(c => c.Name == "candy"));
-            var candyPrice = vm.DisplayVendMessage();
-
+            var colaPrice = vm.SelectItem(items.Find(c => c.Name == "cola"));
+            var chipPrice = vm.SelectItem(items.Find(c => c.Name == "chips"));
+            var candyPrice = vm.SelectItem(items.Find(c => c.Name == "candy"));
+            
             Assert.IsTrue(colaPrice.ToString() == "PRICE $1.00");
             Assert.IsTrue(chipPrice.ToString() == "PRICE $0.50");
             Assert.IsTrue(candyPrice.ToString() == "PRICE $0.65");
@@ -156,10 +156,8 @@ namespace VendingMachineTests
             vm.InsertCoin(dime);
             vm.InsertCoin(dime);
 
-            vm.SelectItem(chips);
-
-            var firstMessage = vm.DisplayVendMessage();
-            var secondMessage = vm.DisplayVendMessage();
+            var firstMessage = vm.SelectItem(chips);
+            var secondMessage = vm.SelectItem(chips);
 
             Assert.IsTrue(firstMessage == "PRICE $0.50");
             Assert.IsTrue(secondMessage == "$0.20");
