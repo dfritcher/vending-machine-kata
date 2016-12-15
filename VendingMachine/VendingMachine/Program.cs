@@ -92,7 +92,7 @@ namespace VendingMachineProject
         private void DispenseItem()
         {
             itemPurchased = true;
-            insertedCoinTotal = insertedCoinTotal - selectedItem.Price;
+            coinReturnTotal = insertedCoinTotal - selectedItem.Price;
 
             dispensedItem = selectedItem;
         }

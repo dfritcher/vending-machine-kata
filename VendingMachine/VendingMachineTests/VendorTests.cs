@@ -174,7 +174,24 @@ namespace VendingMachineTests
             Assert.IsTrue(firstMessage == "PRICE $0.50");
             Assert.IsTrue(secondMessage == "$0.20");
         }
-        
+
+        #endregion
+
+        #region Coin Return Tests
+        [TestMethod]
+        public void RemainingMoneyIsReturnedAfterItemIsSelected()
+        {
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(quarter);
+
+            vm.SelectItem(candy);
+
+            var changeReturned = vm.DisplayCoinReturn();
+
+            Assert.IsTrue(changeReturned == "$0.35");
+        }
         #endregion
     }
 }
