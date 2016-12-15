@@ -11,8 +11,64 @@ namespace VendingMachineProject
         
         static void Main(string[] args)
         {
-           
+            VendingMachine vm = new VendingMachine();
+            var penny = new Coin { Size = Size.NineteenMM, Weight = Weight.TwoAndAHalfGrams };
+            var nickel = new Coin { Size = Size.TwentyOneMM, Weight = Weight.FiveGrams };
+            var dime = new Coin { Size = Size.SeventeenMM, Weight = Weight.TwoGrams };
+            var quarter = new Coin { Size = Size.TwentyFourMM, Weight = Weight.FiveAndAHalfGrams };
+            
+            var products = vm.GetProducts();
+            Console.WriteLine("**** Vending Machine Items ****");
+            foreach (var product in products)
+            {
+                Console.WriteLine(string.Format("{0}. {1} ${2}", product.ItemNumber, product.Name, product.Price));
+            }
+            Console.WriteLine("******************************");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("COMMANDS");
+            Console.WriteLine("R: Return Coins");
+            Console.WriteLine("SR: Show Coin Return Amount");
+            Console.WriteLine("P: Insert Penny");
+            Console.WriteLine("N: Insert Nickle");
+            Console.WriteLine("D: Insert Dime");
+            Console.WriteLine("Q: Insert Quarter");
+            Console.WriteLine("S: STOP APPLICATION");
 
+            var selection = Console.ReadLine().ToUpper();
+
+            while (selection != "S")
+            {
+                switch (selection)
+                {
+                    case "1":
+                    case "2":
+                    case "3":
+                        vm.SelectItem(products.Find(p => p.ItemNumber.ToString() == selection));
+                        break;
+                    case "R":
+                        vm.SelectCoinReturn();
+                        break;
+                    case "P":
+                        vm.InsertCoin(penny);
+                        break;
+                    case "N":
+                        vm.InsertCoin(nickel);
+                        break;
+                    case "D":
+                        vm.InsertCoin(dime);
+                        break;
+                    case "Q":
+                        vm.InsertCoin(quarter);
+                        break;
+                    case "SR":
+                        Console.WriteLine(vm.DisplayCoinReturn());
+                        break;
+                }
+                Console.WriteLine(vm.DisplayVendMessage());
+
+                selection = Console.ReadLine().ToUpper();
+            }
         }
     }
 

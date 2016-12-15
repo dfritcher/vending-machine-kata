@@ -1,0 +1,5 @@
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachine\bin\Release\VendingMachine.exe.config
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachine\bin\Release\VendingMachine.exe
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachine\bin\Release\VendingMachine.pdb
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachine\obj\Release\VendingMachine.exe
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachine\obj\Release\VendingMachine.pdb

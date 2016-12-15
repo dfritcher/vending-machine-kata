@@ -1,0 +1,9 @@
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\obj\Debug\VendingMachineTests.csprojResolveAssemblyReference.cache
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\bin\Debug\VendingMachineTests.dll
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\bin\Debug\VendingMachineTests.pdb
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\bin\Debug\VendingMachine.exe
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\bin\Debug\VendingMachine.pdb
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\obj\Debug\VendingMachineTests.dll
+C:\Users\Fritch\Source\Repos\vending-machine-kata\.git\vending-machine-kata\VendingMachine\VendingMachineTests\obj\Debug\VendingMachineTests.pdb
