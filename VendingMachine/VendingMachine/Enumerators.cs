@@ -24,6 +24,7 @@
 
     public struct Product
     {
+        public int ItemNumber;
         public string Name;
         public decimal Price;
     }

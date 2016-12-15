@@ -8,8 +8,10 @@ namespace VendingMachineProject
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
+           
 
         }
     }
@@ -26,9 +28,9 @@ namespace VendingMachineProject
         private string displayMessage = string.Empty;
 
         private List<Product> products = new List<Product>() {
-            new Product { Name = "cola", Price = 1.00m },
-            new Product { Name = "chips", Price = 0.50m},
-            new Product { Name = "candy", Price = 0.65m }
+            new Product { Name = "cola", Price = 1.00m, ItemNumber = 1 },
+            new Product { Name = "chips", Price = 0.50m, ItemNumber = 2 },
+            new Product { Name = "candy", Price = 0.65m, ItemNumber = 3 }
         };
         #endregion
 
