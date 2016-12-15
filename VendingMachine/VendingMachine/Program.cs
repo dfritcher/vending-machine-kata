@@ -16,12 +16,14 @@ namespace VendingMachineProject
 
     public class VendingMachine
     {
-        private int coinReturnTotal = 0;
-        private decimal insertedCoinTotal = 0;
+        private decimal coinReturnTotal = 0m;
+        private decimal insertedCoinTotal = 0m;
         private Product selectedItem;
         private Product dispensedItem;
+        private bool isValidCoin = false;
         private bool itemPurchased = false;
         private bool displayPrice = false;
+        private string displayMessage = string.Empty;
 
         private List<Product> products = new List<Product>() {
             new Product { Name = "cola", Price = 1.00m },
@@ -38,33 +40,35 @@ namespace VendingMachineProject
             }
         }
 
-        public string InsertCoin(Coin coin)
+        public void InsertCoin(Coin coin)
         {
             if (coin.Size == Size.TwentyOneMM && coin.Weight == Weight.FiveGrams)
             {
+                isValidCoin = true;
                 insertedCoinTotal += .05m;
             }
             if (coin.Size == Size.SeventeenMM && coin.Weight == Weight.TwoGrams)
             {
+                isValidCoin = true;
                 insertedCoinTotal += .10m;
             }
 
             if (coin.Size == Size.TwentyFourMM && coin.Weight == Weight.FiveAndAHalfGrams)
             {
+                isValidCoin = true;
                 insertedCoinTotal += .25m;
             }
 
             if (coin.Size == Size.NineteenMM && coin.Weight == Weight.TwoAndAHalfGrams)
             {
-                coinReturnTotal++;
+                isValidCoin = false;
+                coinReturnTotal += .01m;
             }
-
-            return DisplayCurrencyTotal();
         }
 
-        public int DisplayCoinReturn()
+        public string DisplayCoinReturn()
         {
-            return coinReturnTotal;
+            return Utilities.FormatCurrency(coinReturnTotal);
         }
 
         public List<Product> GetProducts()
@@ -72,14 +76,12 @@ namespace VendingMachineProject
             return products;
         }
 
-        public string SelectItem(Product item)
+        public void SelectItem(Product item)
         {
             selectedItem = item;
             displayPrice = true;
             if(HasEnoughMoneyForSelectedItem)
                 DispenseItem();
-
-            return DisplayVendMessage();
         }
 
         public Product GetDispensedItem()
@@ -97,29 +99,54 @@ namespace VendingMachineProject
 
         private string DisplayItemPrice()
         {
-            return string.Format("PRICE {0:C2}", selectedItem.Price);
+            return "PRICE " + Utilities.FormatCurrency(selectedItem.Price);
         }
 
         private string DisplayCurrencyTotal()
         {
-            return string.Format("{0:C2}", insertedCoinTotal);
+            return Utilities.FormatCurrency(insertedCoinTotal);
         }
 
-        private string DisplayVendMessage()
+        private void CalculateVendMessage()
         {
             if (itemPurchased)
             {
                 itemPurchased = false;
-                return "THANK YOU";
+                displayPrice = false;
+                UpdateVendMessage("THANK YOU");
+                return;
             }
             if (insertedCoinTotal == 0)
-                return "INSERT COIN";
+            {
+                UpdateVendMessage("INSERT COIN");
+                return;
+            }
             if (displayPrice)
             {
                 displayPrice = false;
-                return DisplayItemPrice();
+                UpdateVendMessage(DisplayItemPrice());
+                return;
             }
-            return DisplayCurrencyTotal();
+            UpdateVendMessage(DisplayCurrencyTotal());
+        }
+
+        private void UpdateVendMessage(string message)
+        {
+            displayMessage = message;
+        }
+
+        public string DisplayVendMessage()
+        {
+            CalculateVendMessage();
+            return displayMessage;
+        }
+    }
+
+    public static class Utilities
+    {
+        public static string FormatCurrency(decimal amount)
+        {
+            return string.Format("{0:C2}", amount);
         }
     }
 }
