@@ -16,11 +16,11 @@ namespace VendingMachineProject
 
     public class VendingMachine
     {
+        #region Fields
         private decimal coinReturnTotal = 0m;
         private decimal insertedCoinTotal = 0m;
         private Product selectedItem;
         private Product dispensedItem;
-        private bool isValidCoin = false;
         private bool itemPurchased = false;
         private bool displayPrice = false;
         private string displayMessage = string.Empty;
@@ -30,7 +30,9 @@ namespace VendingMachineProject
             new Product { Name = "chips", Price = 0.50m},
             new Product { Name = "candy", Price = 0.65m }
         };
+        #endregion
 
+        #region Properties
         private bool HasEnoughMoneyForSelectedItem
         {
             get {
@@ -39,29 +41,27 @@ namespace VendingMachineProject
                   && insertedCoinTotal >= selectedItem.Price;
             }
         }
+        #endregion
 
+        #region Public Methods
         public void InsertCoin(Coin coin)
         {
             if (coin.Size == Size.TwentyOneMM && coin.Weight == Weight.FiveGrams)
             {
-                isValidCoin = true;
                 insertedCoinTotal += .05m;
             }
             if (coin.Size == Size.SeventeenMM && coin.Weight == Weight.TwoGrams)
             {
-                isValidCoin = true;
                 insertedCoinTotal += .10m;
             }
 
             if (coin.Size == Size.TwentyFourMM && coin.Weight == Weight.FiveAndAHalfGrams)
             {
-                isValidCoin = true;
                 insertedCoinTotal += .25m;
             }
 
             if (coin.Size == Size.NineteenMM && coin.Weight == Weight.TwoAndAHalfGrams)
             {
-                isValidCoin = false;
                 coinReturnTotal += .01m;
             }
         }
@@ -71,17 +71,15 @@ namespace VendingMachineProject
             return Utilities.FormatCurrency(coinReturnTotal);
         }
 
+        public string DisplayVendMessage()
+        {
+            CalculateVendMessage();
+            return displayMessage;
+        }
+
         public List<Product> GetProducts()
         {
             return products;
-        }
-
-        public void SelectItem(Product item)
-        {
-            selectedItem = item;
-            displayPrice = true;
-            if(HasEnoughMoneyForSelectedItem)
-                DispenseItem();
         }
 
         public Product GetDispensedItem()
@@ -89,10 +87,28 @@ namespace VendingMachineProject
             return dispensedItem;
         }
 
+        public void SelectItem(Product item)
+        {
+            selectedItem = item;
+            displayPrice = true;
+            if (HasEnoughMoneyForSelectedItem)
+                DispenseItem();
+        }
+
+        public void SelectCoinReturn()
+        {
+            coinReturnTotal += insertedCoinTotal;
+            insertedCoinTotal = 0;
+        }
+
+        #endregion
+
+        #region Private Methods
         private void DispenseItem()
         {
             itemPurchased = true;
             coinReturnTotal = insertedCoinTotal - selectedItem.Price;
+            insertedCoinTotal = 0;
 
             dispensedItem = selectedItem;
         }
@@ -134,12 +150,7 @@ namespace VendingMachineProject
         {
             displayMessage = message;
         }
-
-        public string DisplayVendMessage()
-        {
-            CalculateVendMessage();
-            return displayMessage;
-        }
+        #endregion
     }
 
     public static class Utilities

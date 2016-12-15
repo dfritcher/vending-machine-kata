@@ -192,6 +192,22 @@ namespace VendingMachineTests
 
             Assert.IsTrue(changeReturned == "$0.35");
         }
+
+        [TestMethod]
+        public void SelectingCoinReturnButtonReturnsAllCoinsInMachine()
+        {
+            vm.InsertCoin(quarter);
+            vm.InsertCoin(dime);
+            vm.InsertCoin(nickel);
+            
+            vm.SelectCoinReturn();
+
+            var coinReturn = vm.DisplayCoinReturn();
+
+            Assert.IsTrue(coinReturn == "$0.40");
+        }
+
+        
         #endregion
     }
 }
